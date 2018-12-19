@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>HACKER_发帖页</title>
+	<meta name="keywords" content="关键字列表" />
+	<meta name="description" content="网页描述" />
+	<link rel="stylesheet" type="text/css" href="../css/public.css" />
+	<link rel="stylesheet" type="text/css" href="../css/publish.css" />
+	<style type="text/css"></style>
+	<script type="text/javascript"></script>
+</head>
+<body>
+	<div class="header_wrap">
+		<div id="header" class="auto">
+			<div class="logo">HACKER</div>
+			<div class="nav">
+				<a class="hover" href="../">首页</a>
+			</div>
+			<div class="serarch">
+				<form>
+					<input class="keyword" type="text" name="keyword" placeholder="搜索其实很简单" />
+					<input class="submit" type="submit" name="submit" value="" />
+				</form>
+			</div>
+			<div class="login">
+				<a>登录</a>&nbsp;
+				<a>注册</a>
+			</div>
+		</div>
+	</div>
+	<div style="margin-top:55px;"></div>
+	<div id="position" class="auto">
+		 <a>首页</a> &gt; <a>Publish</a>
+	</div>
+	<div id="publish">
+		<form method="POST" action="./published">
+			<select name="module_id">
+				<option>请选择一个版块</option>
+			</select>
+			<input class="title" placeholder="请输入标题" name="pub_title" type="text" />
+			<textarea name="pub_content" class="content"></textarea>
+			<input class="publish" type="submit" value="" />
+			<div style="clear:both;"></div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>SPNEWS_回复页面</title>
+	<meta name="keywords" content="关键字列表" />
+	<meta name="description" content="网页描述" />
+	<link rel="stylesheet" type="text/css" href="../css/public.css" />
+	<link rel="stylesheet" type="text/css" href="../css/publish.css" />
+	<style type="text/css"></style>
+	<script type="text/javascript"></script>
+</head>
+<body>
+	<div class="header_wrap">
+		<div id="header" class="auto">
+			<div class="logo">SPNEWS</div>
+			<div class="nav">
+				<a class="hover">首页</a>
+			</div>
+			<div class="serarch">
+				<form>
+					<input class="keyword" type="text" name="keyword" placeholder="搜索其实很简单" />
+					<input class="submit" type="submit" name="submit" value="" />
+				</form>
+			</div>
+			<div class="login">
+				<a>登录</a>&nbsp;
+				<a>注册</a>
+			</div>
+		</div>
+	</div>
+	<div style="margin-top:55px;"></div>
+	<div id="position" class="auto">
+		 <a>首页</a> &gt; <a>NBA</a> &gt; <a>CBA</a> &gt;
+	</div>
+	<div id="publish">
+		<div>回复：由 <?php echo $row['pub_owner'];?> 发布的 <?php echo $row['pub_title'];?></div>
+		<form method="POST" action="./replyDeal.php">
+			<input type="hidden" name='pub_id' value=<?php echo $pub_id; ?> />
+			<textarea name="rep_content" class="content"></textarea>
+			<input class="reply" type="submit" value="" />
+			<div style="clear:both;"></div>
+		</form>
+	</div>
+</body>
+</html>

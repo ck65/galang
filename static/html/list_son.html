@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>SPNEWS_帖子列表页</title>
+	<meta name="keywords" content="关键字列表" />
+	<meta name="description" content="网页描述" />
+	<link rel="stylesheet" type="text/css" href="../css/public.css" />
+	<link rel="stylesheet" type="text/css" href="../css/list.css" />
+	<style type="text/css"></style>
+	<script type="text/javascript"></script>
+</head>
+<body>
+	<div class="header_wrap">
+		<div id="header" class="auto">
+			<div class="logo">HACKER</div>
+			<div class="nav">
+				<a class="hover" href="../">首页</a>
+			</div>
+			<div class="serarch">
+				<form method="post" action="/search">
+					<input class="keyword" type="text" name="keyword" placeholder="搜索其实很简单" />
+					<input class="submit" type="submit" name="submit" value="" />
+				</form>
+			</div>
+			<div class="login">
+				<a href="/login">登录</a>&nbsp;
+				<a href="/register">注册</a>
+			</div>
+		</div>
+	</div>
+	<div style="margin-top:55px;"></div>
+	<div id="position" class="auto">
+		 <a>首页</a> &gt; <a>tools</a>
+	</div>
+	<div id="main" class="auto">
+		<div id="left">
+			<div class="box_wrap">
+				<h3>NBA</h3>
+				<div class="num">
+				    今日：<span>7</span>&nbsp;&nbsp;&nbsp;
+				    总帖：<span>158061</span>
+				  <div class="moderator"> 子版块： <a>NBA</a> <a>CBA</a></div>
+				</div>
+				<div class="pages_wrap">
+					<a class="btn publish" href="../model/publish.php"></a>
+					<div class="pages">
+						<?php echo $strPage;?>
+					</div>
+					<div style="clear:both;"></div>
+				</div>
+			</div>
+			<div style="clear:both;"></div>
+			<ul class="postsList">
+				<?php while($row = mysql_fetch_assoc($result)) : ?>
+				<?php 
+					$rep_sql="select max(rep_time) as last_time,count(*) as rep_num from reply where rep_pub_id={$row['pub_id']}";
+					$rep_result=mysql_query($rep_sql);
+					$rep_row=mysql_fetch_assoc($rep_result);
+					$last_time=$rep_row['last_time'];
+					$rep_num=$rep_row['rep_num'];
+				?>
+		 		<li>
+					<div class="smallPic">
+						<a href="#">
+							<img width="45" height="45" src="../uploads/images/<?php echo $row['user_image'];?>">
+						</a>
+					</div>
+					<div class="subject">
+						<div class="titleWrap"><a href="#">[分类]</a>&nbsp;&nbsp;<h2><a href="./show.php?pub_id=<?php echo $row['pub_id']; ?>"><?php echo str_replace("$keyword","<font color='red'>$keyword</font>",$row['pub_title']); ?></a></h2></div>
+						<p>
+							楼主：<?php echo $row['pub_owner']; ?>&nbsp;<?php echo date('Y-m-d H:i:s',$row['pub_time']); ?>&nbsp;&nbsp;&nbsp;&nbsp;最后回复：<?php echo $last_time==0?'暂无回复':date('Y-m-d H:m:s',$last_time);?>
+						</p>
+					</div>
+					<div class="count">
+						<p>
+							回复<br /><span><?php echo $rep_num;?></span>
+						</p>
+						<p>
+							浏览<br /><span><?php echo $row['pub_hits']; ?></span>
+						</p>
+					</div>
+					<div style="clear:both;"></div>
+				</li>
+				<?php endWhile; ?>
+
+			</ul>
+			<div class="pages_wrap">
+				<a class="btn publish" href="../model/publish.php"></a>
+				<div class="pages">
+					<?php echo $strPage;?>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+		</div>
+		<div id="right">
+			<div class="classList">
+				<div class="title">版块列表</div>
+				<ul class="listWrap">
+					<li>
+						<h2><a href="#">NBA</a></h2>
+						<ul>
+							<li><h3><a href="#">乔丹</a></h3></li>
+							<li><h3><a href="#">科比</a></h3></li>
+							<li><h3><a href="#">库里</a></h3></li>
+						</ul>
+					</li>
+					<li>
+						<h2><a href="#">CBA</a></h2>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+	</div>
+	<div id="footer" class="auto">
+		<div class="bottom">
+			<a>SPNEWS</a>
+		</div>
+		<div class="copyright">Powered by itcast ©2015 itcast.cn</div>
+	</div>
+</body>
+</html>
+

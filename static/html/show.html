@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>SPNEWS_帖子详情页</title>
+	<meta name="keywords" content="关键字列表" />
+	<meta name="description" content="网页描述" />
+	<link rel="stylesheet" type="text/css" href="../css/public.css" />
+	<link rel="stylesheet" type="text/css" href="../css/show.css" />
+	<style type="text/css"></style>
+	<script type="text/javascript"></script>
+</head>
+<body>
+	<div class="header_wrap">
+		<div id="header" class="auto">
+			<div class="logo">SPNEWS</div>
+			<div class="nav">
+				<a class="hover" href="../index.php">首页</a>
+			</div>
+			<div class="serarch">
+				<form>
+					<input class="keyword" type="text" name="keyword" placeholder="搜索其实很简单" />
+					<input class="submit" type="submit" name="submit" value="" />
+				</form>
+			</div>
+			<div class="login">
+				<a>登录</a>&nbsp;
+				<a>注册</a>
+			</div>
+		</div>
+	</div>
+	<div style="margin-top:55px;"></div>
+	<div id="position" class="auto">
+		<a>首页</a> > <a>{{.Type}}</a>
+	</div>
+	<div id="main" class="auto">
+		<div class="wrap1">
+			<div class="pages">
+				{{.info}}
+			</div>
+			<a class="btn reply" href="./reply.php?pub_id=<?php echo $row['pub_id']; ?>"></a>
+			<div style="clear:both;"></div>
+		</div>
+		<div class="wrapContent">
+			<div class="left">
+				<div class="face">
+					<a target="_blank" href="">
+						<img width="160" height="160" src="../uploads/images/<?php echo $row['user_image'];?>" />
+					</a>
+				</div>
+				<div class="name">
+					<a href=""><?php echo $row['pub_owner']; ?></a>
+				</div>
+			</div>
+			<div class="right">
+				<div class="title">
+					<h2><?php echo $row['pub_title']; ?></h2>
+					<span>阅读：<?php echo $row['pub_hits']; ?>&nbsp;|&nbsp;回复：<?php echo $rep_num;?></span>
+					<div style="clear:both;"></div>
+				</div>
+				<div class="pubdate">
+					<span class="date">发布于：<?php echo date('Y-m-d H:i:s', $row['pub_time']); ?> </span>
+					<span class="floor" style="color:red;font-size:14px;font-weight:bold;">楼主</span>
+				</div>
+				<div class="content">
+					 <?php echo $row['pub_content']; ?>
+				</div>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<?php $i=($nowPage-1)*4+1;while($rep_row=mysql_fetch_assoc($rep_result)): ?>
+		<div class="wrapContent">
+			<div class="left">
+				<div class="face">
+					<a target="_blank" href="">
+						<img width="160" height="160" src="../uploads/images/<?php echo $rep_row['user_image'];?>" />
+					</a>
+				</div>
+				<div class="name">
+					<a href=""><?php echo $rep_row['rep_user'];?></a>
+				</div>
+			</div>
+			<div class="right">
+				
+				<div class="pubdate">
+					<span class="date">回复时间：<?php echo date('Y-m-d H:i:s',$rep_row['rep_time']); ?></span>
+					<span class="floor"><?php echo $i++ ;?>楼&nbsp;|&nbsp;<a href="../model/quote.php?num=<?php echo $i-1;?>&pub_id=<?php echo $row['pub_id'];?>&rep_id=<?php echo $rep_row['rep_id'];?>">引用</a></span>
+				</div>
+				<div class="content">
+					<?php
+					if($rep_row['rep_num']!=0){
+						$quote_sql="select * from reply where rep_id={$rep_row['rep_quote_id']}";
+						$result=mysql_query($quote_sql);
+						$quote_row=mysql_fetch_assoc($result);
+					}
+					?>
+					<?php if($rep_row['rep_num']!=0): ?>
+					<div class="quote">				
+					<h2>引用 <?php echo $rep_row['rep_num'];?>楼 <?php echo $quote_row['rep_user']; ?> 发表的: </h2>
+					<?php echo $quote_row['rep_content']; ?>
+					</div>
+					<?php endif;?>
+					<?php echo $rep_row['rep_content']; ?>
+				</div>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<?php endwhile; ?>
+		<div class="wrap1">
+			<div class="pages">
+				<?php echo $strPage;?>
+			</div>
+			<a class="btn reply" href="./reply.php?pub_id=<?php echo $row['pub_id']; ?>"></a>
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+</body>
+</html>
+
+
