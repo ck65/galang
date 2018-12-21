@@ -22,3 +22,45 @@
 .reg_info{
     margin-left: 670px;
 }
+header h1{
+    margin: 0;
+    text-align: center;
+    font-size: 55px;
+    color: white;
+    font-family: "Microsoft YaHei";
+    font-weight: bold;
+}
+header{
+    background-color: black;
+    overflow: hidden;
+}
+.lt_aside_nav{width:210px;height:100%;position:absolute;top:70px;left:0;background-color: #333333;}
+.content{height: 100%}
+.mCustomScrollbar{ -ms-touch-action: pinch-zoom; touch-action: pinch-zoom; /* direct pointer events to js */ }
+.mCustomScrollBox{ /* contains plugin's markup */
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    max-width: 100%;
+    outline: none;
+    direction: ltr;
+}
+.mCSB_inside > .mCSB_container{ margin-right:0; }
+.mCSB_container{ /* contains the original content */
+    overflow: hidden;
+    width: auto;
+    height: auto;
+}
+.lt_aside_nav dl dt{font-weight:bold;height:45px;line-height:45px;border-bottom:1px #e9e9e9 solid;padding:0 15px;position:relative;}
+body{font-family:"Microsoft YaHei";font-size:.28em;line-height:1;color:#333;background-color:white;}
+.table{width:100%;word-break:break-all;margin-top: 10px}
+table{border-collapse:collapse;border-spacing:0;}
+td,th{padding:0}
+.table th{border:1px #d2d2d2 solid;height:40px;line-height:40px;width:90px;}
+.table td{border:1px #d2d2d2 solid;padding:10px 8px;text-align:center;width:90px;}
+.table tr:nth-child(odd){background:#f8f8f8;}
+.table tr:hover{background:#FFFACD;}
+.table td a{color:#19a97b;margin:0 5px;cursor:pointer;}
+.table td .inner_btn{background:#167DE5;color:white;padding:5px 8px;border-radius:2px;}
+.table td .inner_btn:hover{background:#6666FF;color:#f8f8f8;}
+.table td .cut_title{width:100px;}

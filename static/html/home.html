@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<title>HACKER</title>
+		<meta name="keywords" content="关键字列表" />
+		<meta name="description" content="网页描述" />
+		<link rel="stylesheet" type="text/css" href="../static/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../static/css/index.css" />
+		<link href="../static/css/bootstrap.css" rel="stylesheet">
+		<link href="../static/css/typeahead.bootstrap.css" rel="stylesheet">
+		<link href="../static/css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="../static/css/ctftime2.css" rel="stylesheet"/>
+		<link href="../static/css/translateelement.css" rel="stylesheet"/>
+		<style type="text/css"></style>
+		<script type="text/javascript"></script>
+	</head>
+	<body>
+		<div class="header_wrap">
+		<div id="header" class="auto">
+			<div class="logo">HACKERS</div>
+			<div class="nav">
+				<a class="hover" href="#">首页</a>
+			</div>
+			<div class="serarch">
+				<form action="/Search" method="POST">
+					<input class="keyword" type="text" name="keyword" placeholder="搜索帖子" />
+					<input class="submit" type="submit"  value="" />
+				</form>
+			</div>
+			<div class="nav">
+				<a class="hover" style="margin-left: 550px" href="{{.Action}}">Welcome,{{.Name}}</a>
+			</div>
+		</div>
+	</div>
+		<div style="margin-top:55px;"></div>
+		<div id="hot" class="auto">
+		<div class="title">安全新闻</div>
+		<ul class="newslist">
+			<!-- 20条 -->
+		{{range .Title}}
+			<li>
+				<a href="#">
+                        {{.}}
+				</a>
+			</li>
+			{{end}}
+		</ul>
+		<div style="clear:both;"></div>
+	</div>
+		<div class="box auto">
+		<div class="title">
+			CTF
+		</div>
+		<div class="classList">
+			<div style="padding:10px 0;">
+				<table class="table table-striped">
+					<tbody>
+					<tr>
+						<th>
+								<span style="vertical-align: inherit;">
+									<span style="vertical-align: inherit;">名称</span>
+								</span>
+						</th>
+						<th>
+								<span style="vertical-align: inherit;">
+									<span style="vertical-align: inherit;">日期</span>
+								</span>
+						</th>
+						<th>
+								<span style="vertical-align: inherit;">
+									<span style="vertical-align: inherit;">格式</span>
+								</span>
+						</th>
+						<th>
+								<span style="vertical-align: inherit;">
+									<span style="vertical-align: inherit;">地点</span>
+								</span>
+						</th>
+						<th colspan="2">
+								<span style="vertical-align: inherit;">
+									<span style="vertical-align: inherit;">笔记</span>
+								</span>
+						</th>
+					</tr>
+					{{range .Game}}
+                    <tr>
+                        <td><a href="https://ctftime.org/event/684">
+                            <span style="vertical-align: inherit;">
+                                <span style="vertical-align: inherit;">{{.Name}}</span>
+                            </span>
+                        </a></td>
+                        <td>
+                            <span style="vertical-align: inherit;">
+                                <span style="vertical-align: inherit;">{{.Data}}</span>
+                            </span>
+                        </td>
+                        <td>
+                            <span style="vertical-align: inherit;">
+                                <span style="vertical-align: inherit;">{{.Fromat}}</span>
+                            </span>
+                        </td>
+                        <td>
+                            <span style="vertical-align: inherit;">
+                                <span style="vertical-align: inherit;">
+                                    {{.Location}}
+                                </span>
+                            </span>
+                        </td>
+                        <td></td>
+                        <td>
+                            <span style="vertical-align: inherit;">
+                                <span style="vertical-align: inherit;">{{.Note}}</span>
+                            </span>
+                        </td>
+                    </tr>
+							{{end}}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+		<div class="box auto">
+		<div class="title">
+			学习专区
+		</div>
+		<div class="classList">
+			<div class="childBox new">
+				<h2><a href="/books">书籍分享</a></h2><span>(今日38)</span>
+				帖子：1939539<br />
+			</div>
+			<div class="childBox new">
+				<h2><a href="/tools">工具分享</a></h2> <span>(今日38)</span>
+				帖子：1939539<br />
+			</div>
+			<div class="childBox new">
+				<h2><a href="/talk">论坛交流</a></h2> <span>(今日38)</span>
+				帖子：1939539<br />
+			</div>
+			<div style="clear:both;"></div>
+			<div style="margin-top: 10px">
+				<span><hr></span>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>

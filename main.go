@@ -22,39 +22,58 @@ func getDb() (db *sql.DB) {
 	return db
 }
 
-type User struct {
-	Name  string
-	Infos string
-}
-
-type Title struct {
-	Head string
-	Type string
+type ctf struct {
+	Name     string
+	Data     string
+	Fromat   string
+	Location string
+	Note     string
 }
 
 type Index struct {
-	P    User
-	Info Title
+	Name   string
+	Action string
+	Game   []ctf
+	Title  []string
 }
 
 func index(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm() //解析参数
 	cookie, err := r.Cookie("Cookie")
+	db := getDb()
+	defer db.Close()
 	var username string
 	if err == nil {
-		db := getDb()
 		db.QueryRow("select username from userinfo where cookie=?", cookie.Value).Scan(&username)
 	}
-	p := User{Name: username, Infos: "logout"}
+	p := Index{Name: username, Action: "logout", Title: []string{"None"}}
+	rows, _ := db.Query("select Title from news")
+	for rows.Next() {
+		var title string
+		err = rows.Scan(&title)
+		p.Title = append(p.Title, title)
+	}
+	rowg, _ := db.Query("select Name, Data,Fromat,Location,Note from ctf_info")
+	for rowg.Next() {
+		var Name string
+		var Data string
+		var Fromat string
+		var Location string
+		var Note string
+		rowg.Scan(&Name, &Data, &Fromat, &Location, &Note)
+		ctfs := ctf{Name, Data, Fromat, Location, Note}
+		p.Game = append(p.Game, ctfs)
+	}
+	fmt.Println(p)
 	if username == "" {
 		p.Name = "Anonymous"
-		p.Infos = "login"
+		p.Action = "login"
 		http.SetCookie(w, &http.Cookie{Name: "Cookie", Path: "/", MaxAge: -1})
 	}
-	m := Title{Head: "ssss", Type: "ssssss"}
-	s := Index{P: p, Info: m}
-	t, _ := template.ParseFiles("/html/index.html")
-	log.Println(t.Execute(w, s))
+	fmt.Println(p)
+	t, err := template.ParseFiles("./static/html/home.html")
+	checkerr(err)
+	log.Println(t.Execute(w, p))
 }
 
 func logout(w http.ResponseWriter, r *http.Request) {
@@ -90,7 +109,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	var cookie string
 	fmt.Println(cookie)
 	if r.Method == "GET" {
-		t, _ := template.ParseFiles("./Html/login.html")
+		t, _ := template.ParseFiles("./static/html/login.html")
 		log.Println(t.Execute(w, nil))
 	} else {
 		email := template.HTMLEscapeString(r.Form["email"][0])
@@ -103,7 +122,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 				fmt.Println(err)
 			}
 			if passwords == password && password != "" {
-				//t,_:= template.ParseFiles("./html/index.html")
+				//t,_:= template.ParseFiles("./html/home.html")
 				//t.Execute(w,nil)
 				http.SetCookie(w, &http.Cookie{
 					Name:  "Cookie",
@@ -134,7 +153,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 func reg(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
 	if r.Method == "GET" {
-		t, _ := template.ParseFiles("../html/register.html")
+		t, _ := template.ParseFiles("./static/html/register.html")
 		log.Println(t.Execute(w, nil))
 	} else {
 		//db, err :=sql.Open("mysql","root:root@/test?charset=utf8")
@@ -197,11 +216,13 @@ func GetRandomString(lens int) string {
 }
 
 func main() {
-	http.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir("static"))))
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", index)
 	http.HandleFunc("/login", login)
 	http.HandleFunc("/register", reg)
 	http.HandleFunc("/logout", logout)
+	http.HandleFunc("/books", book)
+	http.HandleFunc("/tools", tool)
 	err := http.ListenAndServe(":9090", nil)
 	if err != nil {
 		log.Fatal("Listen: ", err)

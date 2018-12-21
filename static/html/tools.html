@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Tools</title>
+        <link href="../static/css/maces.css" rel="stylesheet">
+        <script src="../static/js/myjs.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>TOOLS</h1>
+        </header>
+        <div class="lt_aside_nav content mCustomScrollbar _mCS_1" >
+            <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: none;" tabindex="0">
+                <div id="mCSB_1_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" dir="ltr">
+                    <ul>
+                        <li>
+                            <dl>
+                                <dt>
+                                    <a href="/index" target="main" id="t_0" onclick="switchTab('t_0')" style="color: white;" class="active">首页</a>
+                                </dt>
+                            </dl>
+                        </li>
+                        <li>
+                            <dl>
+                                <dt>
+                                    <a href="#" id="t_1" onclick="switchTab('t_1')" target="main" class="active" style="color: white;">工具合集</a>
+                                </dt>
+                            </dl>
+                        </li>
+                        <li>
+                            <dl>
+                                <dt>
+                                    <a href="#" id="t_2" onclick="switchTab('t_2')" target="main" class="active" style="color: white;">WEB工具</a>
+                                </dt>
+                            </dl>
+                        </li>
+                        <li>
+                            <dl>
+                                <dt>
+                                    <a href="#" id="t_3" onclick="switchTab('t_3')" target="main" class="active" style="color: white;">渗透环境</a>
+                                </dt>
+                            </dl>
+                        </li>
+                        <li>
+                            <dl>
+                                <dt>
+                                    <a href="#" id="t_4" onclick="switchTab('t_4')" target="main" class="active" style="color: white;">隐写工具</a>
+                                </dt>
+                            </dl>
+                        </li>
+                        <li>
+                            <dl>
+                                <dt>
+                                    <a href="#" id="t_5" onclick="switchTab('t_5')" target="main" class="active" style="color: white;">逆向工具</a></dt></dl>
+                        </li>
+                        <li>
+                            <dl>
+                                <dt>
+                                    <a href="#" id="t_6" onclick="switchTab('t_6')" target="main" class="active" style="color: white;">漏洞扫描</a></dt></dl>
+                        </li>
+                        <li>
+                            <dl>
+                                <dt>
+                                    <a href="#" id="t_7" onclick="switchTab('t_7')" target="main" class="active" style="color: white;">SQL注入</a></dt></dl>
+                        </li>
+                        <li>
+                            <dl>
+                                <dt>
+                                    <a href="#" id="t_8" onclick="switchTab('t_8')" target="main" class="active" style="color: white;">学习教程</a></dt></dl>
+                        </li>
+                        <li>
+                            <dl>
+                                <dt>
+                                    <a id="t_9" onclick="switchTab('t_9')" target="main" class="active" style="color: white;">社会工程</a></dt></dl>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div style="margin-left: 230px">
+            <table class="table">
+                <tr>
+                    <td style="width:19%">工具名</td>
+                    <td style="width:39%">简介</td>
+                    <td style="width:14%">大小</td>
+                    <td style="width:14%">下载连接</td>
+                    <td style="width:14%">最后更新</td>
+                </tr>
+                {{range .Tool}}
+                <tr name="{{.Type}}" style>
+                    <td style="text-align: center;">
+                        <b>
+                            <a title="{{.Size}}">{{.Name}}</a></b></td>
+                    <td style="text-align: left">{{.Info}}</td>
+                    <td><b>{{.Size}}</b></td>
+                    <td style="text-align: center;">
+                        <a target="_blank" href="{{.Download}}" class="inner_btn"><b>下载</b></a>
+                    </td>
+                    <td>{{.Update}}</td>
+                </tr>
+                {{end}}
+            </table>
+        </div>
+    </body>
+</html>
